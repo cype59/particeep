@@ -23,7 +23,7 @@ class FilmCell extends React.Component {
               <progress id="avancement" className="progressBar" value={(this.props.movies.likes * 100 / (this.props.movies.likes + this.props.movies.dislikes)).toFixed(2)} max="100"></progress>
             </div>
           </CardBody>
-          <Button color="danger" onClick={e => window.confirm("Vous voulez vraiment supprimer ce film ?") && this.props.delete(this.props.movies.id)}>Supprimer</Button>{' '}
+          <Button color="warning" onClick={e => window.confirm("Vous voulez vraiment supprimer ce film ?") && this.props.delete(this.props.movies.id)}>Supprimer</Button>{' '}
         </Card>
       </Col>
 

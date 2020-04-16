@@ -66,7 +66,7 @@ export const movies = [
       id: '10',
       title: 'Gone Girl',
       category: 'Thriller',
-      img: 'https://img.over-blog-kiwi.com/0/49/04/60/20141020/ob_1d642d_gone-girl-poster.jpg',
+      img: 'https://ekladata.com/LEcnl4VQUGxxVvxYLLhSJ_aHs0s.jpg',
       likes: 22,
       dislikes: 12
     },
