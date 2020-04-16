@@ -14,10 +14,14 @@ class FilmCell extends React.Component {
           <CardBody>
             <Row><img src={this.props.movies.img} alt="affiche" className="affiche" /></Row>
             <p className="categorie">Catégorie : {this.props.movies.category}</p>
-            <Button className="like" onClick={() => this.props.compteLikes(this.props.movies.id)}><i className="fas fa-thumbs-up"></i></Button>
-            {this.props.movies.likes}
-            <Button className="like" onClick={() => this.props.compteDislikes(this.props.movies.id)}><i class="fas fa-thumbs-down"></i></Button>
-            {this.props.movies.dislikes}
+            <Row>
+              <Col>
+                <p className="compteur likes" onClick={() => this.props.compteLikes(this.props.movies.id)}><i className="fas fa-thumbs-up"> {this.props.movies.likes}</i></p>
+              </Col>
+              <Col>
+                <p className="compteur dislikes" onClick={() => this.props.compteDislikes(this.props.movies.id)}><i class="fas fa-thumbs-down"> {this.props.movies.dislikes}</i></p>
+              </Col>
+            </Row>
             <div className="bar">
               <progress id="avancement" className="progressBar" value={(this.props.movies.likes * 100 / (this.props.movies.likes + this.props.movies.dislikes)).toFixed(2)} max="100"></progress>
             </div>

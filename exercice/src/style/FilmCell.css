@@ -26,7 +26,7 @@
 
 .progressBar {
     width: 160px;
-    height: 10px;
+    height: 5px;
     background: rgb(175, 175, 175);
 }
 
@@ -41,3 +41,19 @@
 progress::-webkit-progress-value {
     background: #0061D4;
 }
+
+.compteur {
+    margin-top: 10px;
+    margin-bottom: 2px;
+}
+
+.likes:hover {
+    color: #0061D4;
+    cursor: pointer;
+}
+
+.dislikes:hover {
+    color: rgb(212, 0, 0);
+    cursor: pointer;
+}
+
