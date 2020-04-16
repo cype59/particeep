@@ -9,24 +9,31 @@ class FilmList extends React.Component {
         super(props)
         this.handleCompteLikes = this.handleCompteLikes.bind(this)
         this.handleCompteDislikes = this.handleCompteDislikes.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
         this.state = {
             films: movies
         }
     }
 
     handleCompteLikes = (id_select) => {
-        const compteur = this.state.films[id_select-1].likes + 1
-        const infos = this.state.films
-        infos[id_select-1].likes = compteur
-        this.setState(infos)
+        const film_select = this.state.films.filter(film => film.id === id_select);
+        const compteur = film_select[0].likes + 1
+        film_select[0].likes = compteur
+        this.setState(film_select) 
     }
 
     handleCompteDislikes = (id_select) => {
-        const compteur = this.state.films[id_select-1].dislikes + 1
-        const infos = this.state.films
-        infos[id_select-1].dislikes = compteur
-        this.setState(infos)
+        const film_select = this.state.films.filter(film => film.id === id_select);
+        const compteur = film_select[0].dislikes + 1
+        film_select[0].dislikes = compteur
+        this.setState(film_select) 
     }
+
+    handleDelete = (id_select) => {
+        const films = this.state.films.filter(film => film.id !== id_select);
+        this.setState({ films: films });
+    }
+
 
     render() {
         const cells = this.state.films.map(movies => {
@@ -36,6 +43,7 @@ class FilmList extends React.Component {
                     movies={movies}
                     compteLikes={this.handleCompteLikes}
                     compteDislikes={this.handleCompteDislikes}
+                    delete={this.handleDelete}
                 />
             );
         });
