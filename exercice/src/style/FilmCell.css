@@ -2,6 +2,10 @@
     margin-top: 10%;
 }
 
+.titre {
+    font-weight: bold;
+}
+
 .affiche {
     height: 270px;
     display: block;
@@ -9,6 +13,31 @@
     margin-right: auto;
 }
 
-.infos {
-    text-align: left;
+.categorie {
+    margin-top: 5%;
+}
+
+.bar {
+    height: 1rem;
+    overflow: hidden;
+    font-size: .75rem;
+    border-radius: .25rem;
+}
+
+.progressBar {
+    width: 160px;
+    height: 10px;
+    background: rgb(175, 175, 175);
+}
+
+.progressValue {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+progress::-webkit-progress-value {
+    background: #0061D4;
 }
