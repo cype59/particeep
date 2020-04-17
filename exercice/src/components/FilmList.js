@@ -4,6 +4,8 @@ import FilmCell from './FilmCell.js';
 import FilmSorting from './FilmSorting.js';
 import { Container, Row, Card, Col } from 'reactstrap'
 import '../style/FilmList.css';
+import MoviesPagination from './Pagination.js';
+
 
 
 
@@ -15,7 +17,9 @@ class FilmList extends React.Component {
         this.handleDelete = this.handleDelete.bind(this)
         this.state = {
             films: movies,
-            films_copie: movies
+            films_copie: movies,
+            currentPage: 1,
+            postsPerPage: 4,
         }
     }
 
@@ -39,7 +43,7 @@ class FilmList extends React.Component {
         this.setState({ films_copie: films });
     }
 
-    handleCheckChieldElement = (event) => {
+    handleCheckElement = (event) => {
         if (event.target.checked === true) {
             const films = this.state.films.filter(film => film.category === event.target.value);
             this.setState({ films: films });
@@ -48,9 +52,19 @@ class FilmList extends React.Component {
         }
     }
 
-
     render() {
-        const cells = this.state.films.map(movies => {
+
+        // Get current posts
+        const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
+        const indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
+        console.log(indexOfFirstPost)
+        console.log(indexOfLastPost)
+        const currentMovies = this.state.films.slice(indexOfFirstPost, indexOfLastPost);
+
+        // Change page
+        const paginate = pageNumber => this.setState({ currentPage: pageNumber });
+
+        const cells = currentMovies.map(movies => {
             return (
                 <FilmCell
                     key={movies.id}
@@ -69,7 +83,7 @@ class FilmList extends React.Component {
         const uniqueSet = new Set(categorie)
         const categorieArray = [...uniqueSet];
         const listCategorie = categorieArray.map(cat => {
-            return (<FilmSorting key={cat} categorie={cat} handleCheckChieldElement={this.handleCheckChieldElement} />)
+            return (<FilmSorting key={cat} categorie={cat} handleCheckElement={this.handleCheckElement} />)
         })
 
         return (
@@ -82,6 +96,13 @@ class FilmList extends React.Component {
                         </ul>
                     </Col>
                 </Card>
+                <Row>
+                    <MoviesPagination
+                        postsPerPage={this.state.postsPerPage}
+                        totalPosts={this.state.films.length}
+                        paginate={paginate}
+                    />
+                </Row>
                 <Row>
                     {cells}
                 </Row>
