@@ -8,6 +8,7 @@ function App() {
   return (
     <div className="App">
       <NavbarMenu></NavbarMenu>
+      <h2>Bienvenue sur votre selection cinéma </h2>
       <FilmList></FilmList>
     </div>
   );

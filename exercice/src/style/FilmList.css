@@ -11,3 +11,10 @@ ul {
     margin-top: 2%;
     margin-bottom: 0;
 }
+
+.selectOption {
+    width: auto;
+    margin-top: 15px;
+    margin-left: 1%;
+    float: right;
+}

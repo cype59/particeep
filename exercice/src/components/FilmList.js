@@ -2,10 +2,9 @@ import React from 'react';
 import { movies } from '../movie.js';
 import FilmCell from './FilmCell.js';
 import FilmSorting from './FilmSorting.js';
-import { Container, Row, Card, Col } from 'reactstrap'
+import { Container, Row, Card, Col, Input } from 'reactstrap'
 import '../style/FilmList.css';
 import MoviesPagination from './Pagination.js';
-
 
 
 
@@ -15,11 +14,12 @@ class FilmList extends React.Component {
         this.handleCompteLikes = this.handleCompteLikes.bind(this)
         this.handleCompteDislikes = this.handleCompteDislikes.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
+        this.handleChangeSelect = this.handleChangeSelect.bind(this)
         this.state = {
             films: movies,
             films_copie: movies,
             currentPage: 1,
-            postsPerPage: 4,
+            postsPerPage: 8,
         }
     }
 
@@ -52,16 +52,16 @@ class FilmList extends React.Component {
         }
     }
 
+    handleChangeSelect(event) {
+        this.setState({ postsPerPage: event.target.value });
+    }
+
     render() {
 
-        // Get current posts
         const indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
         const indexOfFirstPost = indexOfLastPost - this.state.postsPerPage;
-        console.log(indexOfFirstPost)
-        console.log(indexOfLastPost)
         const currentMovies = this.state.films.slice(indexOfFirstPost, indexOfLastPost);
 
-        // Change page
         const paginate = pageNumber => this.setState({ currentPage: pageNumber });
 
         const cells = currentMovies.map(movies => {
@@ -75,11 +75,13 @@ class FilmList extends React.Component {
                 />
             );
         });
+
         const categorie = this.state.films.map(movies => {
             return (
                 movies.category
             );
         });
+        
         const uniqueSet = new Set(categorie)
         const categorieArray = [...uniqueSet];
         const listCategorie = categorieArray.map(cat => {
@@ -102,6 +104,15 @@ class FilmList extends React.Component {
                         totalPosts={this.state.films.length}
                         paginate={paginate}
                     />
+                    <Col>
+                        <div className="selectOption">
+                            <Input type="select" name="select" value={this.state.postsPerPage} onChange={this.handleChangeSelect}>
+                                <option value="4">4</option>
+                                <option value="8">8</option>
+                                <option value="12">12</option>
+                            </Input>
+                        </div>
+                    </Col>
                 </Row>
                 <Row>
                     {cells}
